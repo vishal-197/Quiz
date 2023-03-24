@@ -35,6 +35,7 @@
 
         let screen1 = document.querySelector('#screen1');
         let screen2 = document.querySelector('#screen2');
+        let screen3 = document.querySelector('#screen3');
         let timershow = document.querySelector('.timer');
 
         let questions = document.querySelector('.question');
@@ -57,29 +58,29 @@
             screen2.style.display="flex"
             timer()
             ques()
-             radio()
             option()
         }
-
         // for(i = 0; )
         console.log
-
+        
         function timer(){
-
             timershow.innerHTML = 5
             let x = setInterval(() => {
-          if (timershow.innerHTML > 0) {
+          if (timershow.innerHTML > 0 ) {
               timershow.innerHTML = timershow.innerHTML-1
-
+              if((questionCounter == 4) && (timershow.innerHTML == 0)){
+                clearInterval(x)
+                screen2.style.display="none"
+                screen3.style.display="flex"
+              }
 
         } else {
           timershow.innerHTML = 5
           questionCounter++
           ques()
-          radio()
-          option()
-       
+          option()      
           }
+             
         }, 1000);
           
         }
@@ -91,34 +92,28 @@
             //     questions.innerHTML += data[i].question
                 
             // }
-       
         }
-        
         
         function  option(){
           op.innerHTML = ''
-                // document.write(data[i].options)
-                op.innerHTML += data[questionCounter].options
-
-
-            // op.innerHTML="vishal"
+          // questions.innerHTML = data[questionCounter].options
+          for (i = 0; i < data[questionCounter].options.length; i++){
+          var radios = document.createElement("input");
+            radios.setAttribute("type", "radio");
+            let label= document.createElement ('label')
+            label.innerHTML = data[questionCounter].options[i]
+            op.append(radios);
+            op.append(label)
+          }
         }
 
-        function radio(){
-          var data2 = ` <ul>
-                <li><input type="radio">/li>
-                <li><input type="radio""></li>
-                <li><input type="radio""> </li>
-                <li><input type="radio"> </li>
-              </ul>`;
+        
 
-              document.querySelector(".qa .options").innerHTML = data2;
-          
-       
-        }
 
-       
-    
+      
+
+
+
 
     </script>
   </body>
