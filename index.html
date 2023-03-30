@@ -25,6 +25,9 @@
       </div>
     </div id="screen3" class="screen">
     <p>Your score is <span> 4</span></p>
+    <p id="ans"> Your answer is </p>
+    <p id="notselected"> </p>
+   
     </div> 
     </div>
 
@@ -40,77 +43,124 @@
 
         let questions = document.querySelector('.question');
         let op = document.querySelector('.options');
+        let ans = document.querySelector('#ans')
+
+        let valueoutput = []
+
+        
+
+
+
+                
 
         let questionCounter = 0
 
         // var createinput = "";
         
-        var strings =  data[questionCounter].options;
-        var convertarry = [strings]
-        console.log(convertarry)
-        console.log(strings +"vishal")
+        // var strings =  data[questionCounter].options;
+        // var convertarry = [strings]
+        // console.log(convertarry)
+        // console.log(strings +"vishal")
         
         
         
         function startquiz(){
+       
 
-            screen1.style.display="none"
-            screen2.style.display="flex"
-            timer()
-            ques()
-            option()
-        }
-        // for(i = 0; )
-        console.log
+          screen1.style.display="none"
+          screen2.style.display="flex"
+          timer()
+          ques()
+          option()
+          // value()
+          // answer()
         
-        function timer(){
+          
+          
+          }
+          // for(i = 0; )
+          console.log
+          
+          function timer(){
             timershow.innerHTML = 5
             let x = setInterval(() => {
-          if (timershow.innerHTML > 0 ) {
-              timershow.innerHTML = timershow.innerHTML-1
-              if((questionCounter == 4) && (timershow.innerHTML == 0)){
-                clearInterval(x)
-                screen2.style.display="none"
-                screen3.style.display="flex"
-              }
-
-        } else {
-          timershow.innerHTML = 5
-          questionCounter++
-          ques()
-          option()      
-          }
-             
-        }, 1000);
-          
-        }
-
-        function ques(){
-          questions.innerHTML = data[questionCounter].question
-            // for(i = 0 ; i < data.length; i++){
-            //     // document.write(data[i].questions)         
-            //     questions.innerHTML += data[i].question
+              if (timershow.innerHTML > 0 ) {
+                timershow.innerHTML = timershow.innerHTML-1
+                if((questionCounter == 4) && (timershow.innerHTML == 0)){
+                  clearInterval(x)
+                  screen2.style.display="none"
+                  // screen3.style.display="flex"
+                  getvalue()
+                  // answer()
+                  
+                  
+                  // console.log(input)
+                }
                 
-            // }
-        }
+              } else {
+                timershow.innerHTML = 5
+                questionCounter++
+                ques()
+                option() 
+                // value()
+                // answer()  
+     
+                
+              }
+              
+            }, 1000);
+            
+          }
+          
+          function ques(){
+            questions.innerHTML = data[questionCounter].question
+            // for(i = 0 ; i < data.length; i++){
+              //     // document.write(data[i].questions)         
+              //     questions.innerHTML += data[i].question
+              
+              // }
+            }
+            
+            function  option(){
+              op.innerHTML = ''
+              // questions.innerHTML = data[questionCounter].options
+              for (i = 0; i < data[questionCounter].options.length; i++){
+                var radios = document.createElement("input");
+                radios.setAttribute("type", "radio");
+                radios.setAttribute("value", data[questionCounter].options[i]);
+                radios.setAttribute("id",  data[questionCounter].options[i]);
+                radios.setAttribute("name", "radio_ans");
+                let label= document.createElement ('label')
+                label.innerHTML = data[questionCounter].options[i];
+                label.setAttribute("for", data[questionCounter].options[i]);
+                op.append(radios);
+                op.append(label);
+                
+                radios.addEventListener('change', function() {
+                  const selectedValue = document.querySelector('input[type="radio"]:checked').value;
+                  console.log(selectedValue);
+                  
+                 
+                   valueoutput.push(selectedValue)
+                   console.log(valueoutput)
+                  
+                //  let text = selectedValue
+                //  let myArr = Array.from(text)  
+                //   console.log(myArr)
+                });
+      
+            
         
-        function  option(){
-          op.innerHTML = ''
-          // questions.innerHTML = data[questionCounter].options
-          for (i = 0; i < data[questionCounter].options.length; i++){
-          var radios = document.createElement("input");
-            radios.setAttribute("type", "radio");
-            let label= document.createElement ('label')
-            label.innerHTML = data[questionCounter].options[i]
-            op.append(radios);
-            op.append(label)
           }
         }
+       
 
-        
-
+          
+    
 
       
+
+
 
 
 
